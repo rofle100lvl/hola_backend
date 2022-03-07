@@ -16,12 +16,12 @@ def get_kits():
     kits = {'kits': []}
     for res in result:
         kits['kits'].append(get_kit(res[0]).__dict__())
-    return json.dumps(kits)
+    return json.dumps(kits,ensure_ascii=False)
 
 
 @app.route('/kit/<int:kit_id>', methods=['GET'])
 def get_questions(kit_id):
-    ans = json.dumps(get_kit(kit_id.__dict__()))
+    ans = json.dumps(get_kit(kit_id).__dict__(),ensure_ascii=False)
     return ans
 
 
