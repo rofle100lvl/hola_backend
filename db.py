@@ -11,11 +11,15 @@ class DataBase:
         cursor = conn.cursor()
         cursor.execute("""CREATE TABLE IF NOT EXISTS Kit(
                         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
-                        name TEXT NOT NULL
+                        name TEXT NOT NULL,
+                        hexStartColor TEXT default('#C5DD9D'),
+                        hexFinishColor TEXT default('#58B5BB'),
+                        hexTitleColor TEXT default('#000000'),
+                        hexTextColor TEXT default('#000000') 
                         )""")
         cursor.execute("""CREATE TABLE IF NOT EXISTS Question(
                                 id INTEGER NOT NULL PRIMARY KEY,
-                                question TEXT NOT NULL
+                                question TEXT NOT NULL       
                                 )""")
         cursor.execute("""CREATE TABLE IF NOT EXISTS Relation(
                                 id INTEGER NOT NULL PRIMARY KEY, 
@@ -23,23 +27,34 @@ class DataBase:
                                 question_id BIGINT NOT NULL 
                                 )""")
 
-    def get_questions_by_kit(self, kit):
+    def get_kit(self, kit):
         conn = sqlite3.connect(self.DATABASE)
         cursor = conn.cursor()
-        cursor.execute(f"""select * from Question where
-                            Question.id in (
-                            select Relation.question_id from Relation where Relation.kit_id = {kit}
-)""")
+        cursor.execute(f"SELECT * FROM Kit WHERE id={kit}")
         conn.commit()
         ans = cursor.fetchall()
         cursor.close()
         conn.close()
         return ans
 
-    def get_kits(self):
+    def get_questions_by_kit(self, kit):
         conn = sqlite3.connect(self.DATABASE)
         cursor = conn.cursor()
-        cursor.execute(f"SELECT * FROM Kit")
+        cursor.execute(f"""
+        select * from Question 
+        WHERE Question.id in (
+        select Relation.question_id from Relation where Relation.kit_id = {kit}) 
+        """)
+        conn.commit()
+        ans = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return ans
+
+    def get_kits_id(self):
+        conn = sqlite3.connect(self.DATABASE)
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT id FROM Kit")
         conn.commit()
         ans = cursor.fetchall()
         cursor.close()
