@@ -8,4 +8,5 @@ class Question:
 
     def __dict__(self):
         return {'id': self.id,
-                'question': self.question}
+                'title': f"Карта {self.id}",
+                'text': self.question}
