@@ -4,34 +4,37 @@ from flask import Flask
 from Models.Kit import Kit
 from Models.Question import Question
 from db import DataBase
+import os
+from dbfiller import filldb
 
+os.remove('mydatabase.db')
 app = Flask(__name__)
 
 db = DataBase()
+filldb(db)
+
 
 
 @app.route('/kits/', methods=['GET'])
 def get_kits():
-    ans = ""
     result = db.get_kits()
+    kits = []
     for res in result:
-        kit = Kit(id=res[0], name=res[2], number=res[1])
-        ans += json.dumps(kit.__dict__())
+        kits.append(Kit(id=res[0], name=res[1]).__dict__())
+    ans = json.dumps(kits)
+    ans = ans.encode('utf-8')
     return ans
 
 
 @app.route('/questions/<int:kit_id>', methods=['GET'])
 def get_questions(kit_id):
-    ans = ""
     result = db.get_questions_by_kit(kit_id)
-    if result is None:
-        return ans
-    elif type(result) != type(list):
-        result = [result]
-
+    questions = []
     for res in result:
-        question = Question(res[0], res[1], res[2])
-        ans += json.dumps(question.__dict__())
+        questions.append(Question(res[0], res[1]).__dict__())
+    print(questions)
+    ans = json.dumps(questions)
+    ans = ans.encode('utf-8')
     return ans
 
 
