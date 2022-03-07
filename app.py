@@ -7,7 +7,8 @@ from db import DataBase
 import os
 from dbfiller import filldb
 
-os.remove('mydatabase.db')
+if os.path.exists('mydatabase.db'):
+    os.remove('mydatabase.db')
 app = Flask(__name__)
 
 db = DataBase()
