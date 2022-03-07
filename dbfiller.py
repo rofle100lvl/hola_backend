@@ -17,3 +17,4 @@ def filldb(db):
                     db.add_question(line[:-1])
                     db.add_relation(filename[:-4], line[:-1])
 
+

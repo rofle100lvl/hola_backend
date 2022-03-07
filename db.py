@@ -26,6 +26,13 @@ class DataBase:
                                 kit_id BIGINT NOT NULL,
                                 question_id BIGINT NOT NULL 
                                 )""")
+        cursor.execute("""CREATE TABLE IF NOT EXISTS Developer(
+        id INTEGER NOT NULL PRIMARY KEY,
+        name TEXT NOT NULL, 
+        description TEXT NOT NULL,
+        imageUrlString TEXT NOT NULL
+        )
+        """)
 
     def get_kit(self, kit):
         conn = sqlite3.connect(self.DATABASE)
@@ -99,3 +106,22 @@ class DataBase:
         conn.commit()
         cursor.close()
         conn.close()
+
+    def add_developer(self, name, description, imageUrlString):
+        conn = sqlite3.connect(self.DATABASE)
+        cursor = conn.cursor()
+        cursor.execute(f"INSERT INTO Developer (name, description, imageUrlString) "
+                       f"values ('{name, description, imageUrlString}')")
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+    def get_developers(self):
+        conn = sqlite3.connect(self.DATABASE)
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT * FROM Developer")
+        conn.commit()
+        ans = cursor.fetchall()
+        cursor.close()
+        conn.close()
+        return ans
