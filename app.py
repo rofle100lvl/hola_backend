@@ -7,13 +7,9 @@ from db import DataBase
 import os
 from dbfiller import filldb
 
-if os.path.exists('mydatabase.db'):
-    os.remove('mydatabase.db')
 app = Flask(__name__)
 
 db = DataBase()
-filldb(db)
-
 
 
 @app.route('/kits/', methods=['GET'])
