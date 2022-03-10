@@ -18,7 +18,7 @@ def filldb(db):
         lines = f.readlines()
         for line in lines:
             arg = line.split(',')
-            db.add_developer(arg[0], arg[1], arg[2])
+            db.add_developer(arg[0], arg[1], arg[2][:-1])
 
 
 
