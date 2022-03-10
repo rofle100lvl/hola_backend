@@ -73,6 +73,7 @@ class DataBase:
         cursor = conn.cursor()
         cursor.execute(f"DELETE FROM Kit")
         cursor.execute(f"DELETE FROM Question")
+        cursor.execute(f"DELETE FROM Relation")
         conn.commit()
         cursor.close()
         conn.close()
@@ -111,7 +112,7 @@ class DataBase:
         conn = sqlite3.connect(self.DATABASE)
         cursor = conn.cursor()
         cursor.execute(f"INSERT INTO Developer (name, description, imageUrlString) "
-                       f"values ('{name, description, imageUrlString}')")
+                       f"values ('{name}', '{description}', '{imageUrlString}')")
         conn.commit()
         cursor.close()
         conn.close()

@@ -1,8 +1,6 @@
 import os
-from db import DataBase
 
 directory = 'Kits'
-
 
 def filldb(db):
     db.clear_tables()
@@ -16,5 +14,11 @@ def filldb(db):
                 for line in lines:
                     db.add_question(line[:-1])
                     db.add_relation(filename[:-4], line[:-1])
+    with open('Developers/Description.csv') as f:
+        lines = f.readlines()
+        for line in lines:
+            arg = line.split(',')
+            db.add_developer(arg[0], arg[1], arg[2])
+
 
 

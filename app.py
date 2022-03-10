@@ -3,11 +3,14 @@ import json
 from flask import Flask
 from Models.Kit import Kit
 from Models.Question import Question
+from Models.Developer import Developer
 from db import DataBase
+from dbfiller import filldb
 
 app = Flask(__name__)
 
 db = DataBase()
+
 
 @app.route('/kits/', methods=['GET'])
 def get_kits():
@@ -23,6 +26,15 @@ def get_questions(kit_id):
     kit = get_kit(kit_id)
     ans = json.dumps(kit.__dict__(), ensure_ascii=False)
     return ans
+
+
+@app.route('/developers/', methods=['GET'])
+def get_developers():
+    results = db.get_developers()
+    developers = []
+    for result in results:
+        developers.append(Developer(result[0], result[1], result[2], result[3]).__dict__())
+    return json.dumps(developers, ensure_ascii=False)
 
 
 def get_kit(kit_id):
