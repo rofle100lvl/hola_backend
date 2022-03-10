@@ -17,8 +17,11 @@ def filldb(db):
     with open('Developers/Description.csv') as f:
         lines = f.readlines()
         for line in lines:
+            if line[-1] == '\n':
+                line = line[:-1]
             arg = line.split(',')
-            db.add_developer(arg[0], arg[1], arg[2][:-1])
+
+            db.add_developer(arg[0], arg[1], arg[2])
 
 
 
