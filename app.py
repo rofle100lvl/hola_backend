@@ -43,8 +43,7 @@ def get_kit(kit_id):
         return []
     kit_res = kit_res[0]
     questions_res = db.get_questions_by_kit(kit_id)
-    kit = Kit(kit_res[0], kit_res[1], kit_res[2], kit_res[3], kit_res[4], kit_res[5])
-    kit.cards = []
+    kit = Kit(kit_res[0], kit_res[1], kit_res[2], kit_res[3], kit_res[4], kit_res[5], kit_res[6])
     for res in questions_res:
         kit.cards.append(Question(res[0], res[1]).__dict__())
     return kit

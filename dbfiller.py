@@ -1,6 +1,17 @@
 import os
 
 directory = 'Kits'
+colors = {'Незнакомая компания' : ['#C5DD9D', '#58B5BB'],
+          'Познание себя': ['#F4F1CF', '#F4F1CF'],
+          'Для пары': ['#ADE2F2', '#4E81B0'],
+          'Круг Друзей': ['#E2E392', '#BB83C0']}
+
+descriptions = {
+          'Незнакомая компания' : 'Вопросоы, которые помогут вам сделать неуклюжую беседу проще',
+          'Познание себя': 'Ключ к достижению личного успеха. Однако научиться понимать себя не так-то просто.',
+          'Круг Друзей': 'Список отличных вопросов, которые помогут сблизиться, повеселиться и лучше узнать своих друзей.',
+          'Для пары': 'Для тех, кто хочет узнать свою вторую половинку получше'}
+
 
 def filldb(db):
     db.clear_tables()
@@ -8,7 +19,7 @@ def filldb(db):
         file_name = os.path.join(directory, filename)
         if os.path.isfile(file_name):
             print(filename)
-            db.add_kit(filename[:-4])
+            db.add_kit(filename[:-4], colors[filename[:-4]][0], colors[filename[:-4]][1], descriptions[filename[:-4]])
             with open(file_name) as f:
                 lines = f.readlines()
                 for line in lines:
@@ -22,6 +33,4 @@ def filldb(db):
             arg = line.split(',')
 
             db.add_developer(arg[0], arg[1], arg[2])
-
-
 

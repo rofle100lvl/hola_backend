@@ -1,23 +1,18 @@
 class Kit:
-    id = -1
-    name = ""
-    cards = []
-    hexStartColor = ""
-    hexFinishColor = ""
-    hexTitleColor = ""
-    hexTextColor = ""
-
-    def __init__(self, id, name, hexStartColor, hexFinishColor, hexTitleColor, hexTextColor):
+    def __init__(self, id, name,description, hexStartColor, hexFinishColor, hexTitleColor, hexTextColor):
+        self.cards = []
         self.id = id
         self.name = name
         self.hexTextColor = hexTextColor
         self.hexStartColor = hexStartColor
         self.hexTitleColor = hexTitleColor
         self.hexFinishColor = hexFinishColor
+        self.description = description
 
     def __dict__(self):
         return {'id': self.id,
                 'title': self.name,
+                'description': self.description,
                 'cards': self.cards,
                 'hexStartColor': self.hexStartColor,
                 'hexFinishColor': self.hexFinishColor,

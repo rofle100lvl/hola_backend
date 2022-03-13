@@ -12,6 +12,7 @@ class DataBase:
         cursor.execute("""CREATE TABLE IF NOT EXISTS Kit(
                         id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
                         name TEXT NOT NULL,
+                        description TEXT NOT NULL,
                         hexStartColor TEXT default('#C5DD9D'),
                         hexFinishColor TEXT default('#58B5BB'),
                         hexTitleColor TEXT default('#000000'),
@@ -78,10 +79,10 @@ class DataBase:
         cursor.close()
         conn.close()
 
-    def add_kit(self, kit):
+    def add_kit(self, kit, startColor, endColor, description):
         conn = sqlite3.connect(self.DATABASE)
         cursor = conn.cursor()
-        cursor.execute(f"INSERT INTO Kit (name) values ('{kit}')")
+        cursor.execute(f"INSERT INTO Kit (name, description,hexStartColor, hexFinishColor) values ('{kit}', '{description}', '{startColor}', '{endColor}')")
         conn.commit()
         cursor.close()
         conn.close()
