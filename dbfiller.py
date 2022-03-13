@@ -12,6 +12,10 @@ descriptions = {
           'Круг Друзей': 'Список отличных вопросов, которые помогут сблизиться, повеселиться и лучше узнать своих друзей.',
           'Для пары': 'Для тех, кто хочет узнать свою вторую половинку получше'}
 
+links = {
+
+}
+
 
 def filldb(db):
     db.clear_tables()
@@ -32,5 +36,5 @@ def filldb(db):
                 line = line[:-1]
             arg = line.split(',')
 
-            db.add_developer(arg[0], arg[1], arg[2])
+            db.add_developer(arg[0], arg[1], arg[2], arg[3])
 

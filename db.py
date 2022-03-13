@@ -31,7 +31,8 @@ class DataBase:
         id INTEGER NOT NULL PRIMARY KEY,
         name TEXT NOT NULL, 
         description TEXT NOT NULL,
-        imageUrlString TEXT NOT NULL
+        imageUrlString TEXT NOT NULL,
+        networkUrl TEXT NOT NULL
         )
         """)
 
@@ -109,11 +110,11 @@ class DataBase:
         cursor.close()
         conn.close()
 
-    def add_developer(self, name, description, imageUrlString):
+    def add_developer(self, name, description, imageUrlString, networkUrl):
         conn = sqlite3.connect(self.DATABASE)
         cursor = conn.cursor()
-        cursor.execute(f"INSERT INTO Developer (name, description, imageUrlString) "
-                       f"values ('{name}', '{description}', '{imageUrlString}')")
+        cursor.execute(f"INSERT INTO Developer (name, description, imageUrlString, networkUrl) "
+                       f"values ('{name}', '{description}', '{imageUrlString}', '{networkUrl}')")
         conn.commit()
         cursor.close()
         conn.close()

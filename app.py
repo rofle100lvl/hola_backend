@@ -11,7 +11,6 @@ app = Flask(__name__)
 
 db = DataBase()
 
-
 @app.route('/kits/', methods=['GET'])
 def get_kits():
     result = db.get_kits_id()
@@ -33,7 +32,7 @@ def get_developers():
     results = db.get_developers()
     developers = []
     for result in results:
-        developers.append(Developer(result[0], result[1], result[2], result[3]).__dict__())
+        developers.append(Developer(result[0], result[1], result[2], result[3], result[4]).__dict__())
     return json.dumps(developers, ensure_ascii=False)
 
 
