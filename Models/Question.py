@@ -3,7 +3,7 @@ class Question:
     question = ""
 
     def __init__(self, id, question):
-        self.id = id
+        self.id = str(id)
         self.question = question
 
     def __dict__(self):

@@ -1,7 +1,7 @@
 class Kit:
     def __init__(self, id, name,description, hexStartColor, hexFinishColor, hexTitleColor, hexTextColor):
         self.cards = []
-        self.id = id
+        self.id = str(id)
         self.name = name
         self.hexTextColor = hexTextColor
         self.hexStartColor = hexStartColor
