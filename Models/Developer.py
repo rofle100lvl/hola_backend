@@ -1,6 +1,6 @@
 class Developer:
     def __init__(self, id, name, description, imageUrl, networkUrl):
-        self.id = str(id)
+        self.id = id
         self.name = name
         self.description = description
         self.imageUrl = imageUrl
